@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GIquery</title>
+</head>
+<body>
+<h1> Tables:</h1>
+<ul>
+    {% for rows in all_tables %}
+    <li>
+         {{ rows.0 }} - {{ rows.2 }}
+    </li>
+    {% endfor %}
+</ul>
+
+
+</body>
+</html>
