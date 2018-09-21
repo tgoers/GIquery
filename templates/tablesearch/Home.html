@@ -2,18 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <title>GIquery</title>
 </head>
-<body>
-<h1> Tables:</h1>
-<ul>
-    {% for rows in all_tables %}
-    <li>
-         {{ rows.0 }} - {{ rows.2 }}
-    </li>
-    {% endfor %}
-</ul>
 
 
-</body>
+
+{% block content %}
+<br>
+    <!-- Search Bar -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-1"></div>
+            <div class="col-md-8" style="background-color: #D3D3D3">
+                <div class="input-group" id="adv-search">
+                    <!-- Serch Box -->
+                    <input type="text" class="form-control" placeholder="Search for files" />
+                    <div class="input-group-btn">
+                        <div class="btn-group" role="group">
+                            <div class="dropdown dropdown-lg"> <!-- HERE dropdown-lg -->
+                                <!-- Dropdown Button -->
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="color: white; background-color: #071D28">
+                                </button>
+                                <div class="dropdown-menu" role="menu"> <!-- HERE  dropdown-menu-right -->
+                                    <!-- Advanced Search Options -->
+                                    <form class="px-4 py-3" role="form"> <!-- -horizontal -->
+                                        <div class="form-group">
+                                            <label for="filter">Filter by</label>
+                                            <select>
+                                                <option value="0">All Data Types</option>
+                                                <option value="1">Point</option>
+                                                <option value="2">Polyline</option>
+                                                <option value="3">Polygon</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contain">Spatial Reference System</label>
+                                            <input class="form-control" type="text" />
+                                        </div>
+                                        <!-- Advanced Search Submit Button -->
+                                        <button type="submit" class="btn btn-primary" style="background-color: #071D28">Submit</span></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Submit Button -->
+                            <button type="button" class="btn btn-primary" style="background-color: #071D28">Submit</span></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <!-- Search Results -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+        <!-- Table List -->
+            <div class="col-md-8" style="background-color: #D3D3D3">
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        {% for rows in data_type %}
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <!-- Model: DataType -->
+                                    <div class="col-md-8">
+                                        <span class="font-weight-bold">Database: </span>{{ rows.0 }}<br>
+                                        <span class="font-weight-bold">Table: </span>{{ rows.2 }}<br>
+                                        <span class="font-weight-bold">Data Type: </span>{{ rows.6 }}<br>
+                                        <span class="font-weight-bold">SRID: </span>{{ rows.5 }}<br>
+                                    </div>
+                                    <!--Buttons-->
+                                    <div class="col-md-4">
+                                        <div style ="float: right">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-secondary" style="background-color: #071D28">Detail View</button>
+                                            <button type="button" class="btn btn-secondary" style="background-color: #071D28"><i class="far fa-star"></i></button>
+                                            <button type="button" class="btn btn-secondary" style="background-color: #071D28"><i class="fas fa-file-download"></i></button>
+                                        </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+{% endblock %}
+
 </html>
